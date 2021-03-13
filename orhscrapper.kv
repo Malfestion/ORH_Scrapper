@@ -1,0 +1,72 @@
+WindowManager:
+    MainWindow:
+    SecondWindow:
+    
+<MainWindow>:
+    search_input: search_input
+    name: "main"
+    GridLayout:
+        cols:1
+        GridLayout:
+            cols:2
+            size_hint: 1, .1
+            Label:
+                text:"Ingrese el termino a buscar: "
+                size_hint: 1, .1
+                font_size:30
+            TextInput:
+                id: search_input
+                size_hint: 1, .1
+                font_size:30
+                multiline:False     
+        Button:
+            text:"Buscar"
+            background_color:0, 1, 0, 1
+            font_size:50
+            on_press:
+                root.set_text()
+            on_release:
+                app.root.current="second" if search_input.text != "" else "main"
+                root.manager.transition.direction="left"
+                search_input.text=""
+
+
+<SecondWindow>:
+    text_found: text_found
+    name: "second"
+    
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint: 1,1.01
+            BoxLayout:
+                size_hint: 1,None
+                height: self.minimum_height
+                orientation: 'vertical'
+
+                Label:
+                    id: text_found
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    text_size: self.width, None
+                    padding: 10, 10
+                    markup: True
+                    text: ""
+                    on_ref_press:
+                        import webbrowser
+                        webbrowser.open(args[1])    
+        
+            
+         
+        Button:
+            text: "Volver"
+            background_color:0, 1, 0, 1
+            size_hint: 1, .1
+            font_size:50
+            on_release:
+                app.root.current="main"
+                root.manager.transition.direction="right"
+                text_found.text=""
+   
