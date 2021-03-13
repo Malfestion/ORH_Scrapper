@@ -8,6 +8,8 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.buildozer/
+bin/
 build/
 develop-eggs/
 dist/
@@ -21,6 +23,7 @@ sdist/
 var/
 wheels/
 pip-wheel-metadata/
+log.txt
 share/python-wheels/
 *.egg-info/
 .installed.cfg
